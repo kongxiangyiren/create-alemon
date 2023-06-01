@@ -6,7 +6,7 @@ import { join } from 'path';
 import { red } from 'kolorist';
 
 async function start() {
-  let result: prompts.Answers<'name' | 'overwrite' | 'overwriteChecker'>;
+  let result: prompts.Answers<'name' | 'overwrite' | 'overwriteChecker' | 'plugins'>;
 
   try {
     result = await prompts(
@@ -35,6 +35,18 @@ async function start() {
             return null;
           },
           name: 'overwriteChecker'
+        },
+        {
+          type: 'multiselect',
+          name: 'plugins',
+          message: '选择插件: ',
+          choices: [
+            // disabled :禁用 selected :默认选择
+            // { title: 'Green', value: '#00ff00', disabled: true },
+            { title: 'point-plugin', value: 'point-plugin', selected: true },
+            { title: 'Sky', value: 'Sky' },
+            { title: 'xianyu-plugin-alemon', value: 'xianyu-plugin-alemon' }
+          ]
         }
       ],
       {
@@ -48,7 +60,7 @@ async function start() {
     return;
   }
 
-  const { name, overwrite } = result;
+  const { name, overwrite, plugins } = result;
 
   // 判断是否有相同的文件夹
   if (overwrite) {
@@ -75,6 +87,8 @@ async function start() {
     return;
   }
   console.log('Alemon-Bot cloned successfully!');
+  setPlugins(name, plugins);
+
   console.log(`------------------------------------`);
   console.log(`----------Alemon-Bot----------------`);
   console.log(`------------------------------------`);
@@ -88,3 +102,42 @@ async function start() {
   console.log(`------------------------------------`);
 }
 start();
+
+function setPlugins(name: string, plugins: Array<string>) {
+  // 安装测试插件
+  if (plugins.includes('point-plugin')) {
+    console.log('开始安装 point-plugin');
+
+    execSync(
+      `cd ./${name} && git clone --depth=1 https://gitee.com/three-point-of-water/point-plugin.git ./plugins/point-plugin/`,
+      {
+        stdio: 'inherit'
+      }
+    );
+
+    console.log('安装 point-plugin 完成');
+  }
+
+  if (plugins.includes('Sky')) {
+    console.log('开始安装 Sky');
+
+    execSync(`cd ./${name} && git clone https://gitee.com/Tloml-Starry/Sky.git ./plugins/Sky/`, {
+      stdio: 'inherit'
+    });
+
+    console.log('安装 Sky 完成');
+  }
+
+  if (plugins.includes('xianyu-plugin-alemon')) {
+    console.log('开始安装 xianyu-plugin-alemon');
+
+    execSync(
+      `cd ./${name} && git clone --depth=1 https://gitee.com/suancaixianyu/xianyu-plugin-alemon.git ./plugins/xianyu-plugin-alemon/`,
+      {
+        stdio: 'inherit'
+      }
+    );
+
+    console.log('安装 xianyu-plugin-alemon 完成');
+  }
+}
