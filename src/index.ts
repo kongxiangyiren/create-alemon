@@ -43,7 +43,7 @@ async function start() {
           choices: [
             // disabled :禁用 selected :默认选择
             // { title: 'Green', value: '#00ff00', disabled: true },
-            { title: 'point-plugin', value: 'point-plugin', selected: true },
+            { title: 'alemon-plugin', value: 'alemon-plugin', selected: true },
             { title: 'Sky', value: 'Sky' },
             { title: 'xianyu-plugin-alemon', value: 'xianyu-plugin-alemon' }
           ]
@@ -105,17 +105,17 @@ start();
 
 function setPlugins(name: string, plugins: Array<string>) {
   // 安装测试插件
-  if (plugins.includes('point-plugin')) {
-    console.log('开始安装 point-plugin');
+  if (plugins.includes('alemon-plugin')) {
+    console.log('开始安装 alemon-plugin');
 
     execSync(
-      `cd ./${name} && git clone --depth=1 https://gitee.com/three-point-of-water/point-plugin.git ./plugins/point-plugin/`,
+      `cd ./${name} && git clone --depth=1 https://gitee.com/ningmengchongshui/alemon-plugin.git ./plugins/alemon-plugin/`,
       {
         stdio: 'inherit'
       }
     );
 
-    console.log('安装 point-plugin 完成');
+    console.log('安装 alemon-plugin 完成');
   }
 
   if (plugins.includes('Sky')) {
