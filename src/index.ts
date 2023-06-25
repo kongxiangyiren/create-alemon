@@ -45,7 +45,9 @@ async function start() {
             // { title: 'Green', value: '#00ff00', disabled: true },
             { title: 'alemon-plugin', value: 'alemon-plugin', selected: true },
             { title: 'Sky', value: 'Sky' },
-            { title: 'xianyu-plugin-alemon', value: 'xianyu-plugin-alemon' }
+            { title: 'xianyu-plugin-alemon', value: 'xianyu-plugin-alemon' },
+            { title: 'alemon-plugin-kong', value: 'alemon-plugin-kong' },
+            { title: 'alemon-plugin-1999', value: 'alemon-plugin-1999' }
           ]
         }
       ],
@@ -96,10 +98,6 @@ async function start() {
   console.log(`npm install #Load Dependencies`);
   console.log(`npm run app #Firing app`);
   console.log(`------------------------------------`);
-  console.log(`npm install pm2 -g #pm2`);
-  console.log(`npm install ts-node -g #ts-node`);
-  console.log(`npm run start #Background startup`);
-  console.log(`------------------------------------`);
 }
 start();
 
@@ -139,5 +137,31 @@ function setPlugins(name: string, plugins: Array<string>) {
     );
 
     console.log('安装 xianyu-plugin-alemon 完成');
+  }
+
+  if (plugins.includes('alemon-plugin-kong')) {
+    console.log('开始安装 alemon-plugin-kong');
+
+    execSync(
+      `cd ./${name} && git clone https://gitee.com/fei-yuhao/alemon-plugin-kong.git ./plugins/alemon-plugin-kong/`,
+      {
+        stdio: 'inherit'
+      }
+    );
+
+    console.log('安装 alemon-plugin-kong 完成');
+  }
+
+  if (plugins.includes('alemon-plugin-1999')) {
+    console.log('开始安装 alemon-plugin-1999');
+
+    execSync(
+      `cd ./${name} && git clone https://gitee.com/fantasy-hx/alemon-plugin-1999.git ./plugins/alemon-plugin-1999`,
+      {
+        stdio: 'inherit'
+      }
+    );
+
+    console.log('安装 alemon-plugin-1999 完成');
   }
 }
