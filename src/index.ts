@@ -43,11 +43,19 @@ async function start() {
           choices: [
             // disabled :禁用 selected :默认选择
             // { title: 'Green', value: '#00ff00', disabled: true },
-            { title: 'alemon-plugin', value: 'alemon-plugin', selected: true },
-            { title: 'Sky', value: 'Sky' },
-            { title: 'xianyu-plugin-alemon', value: 'xianyu-plugin-alemon' },
-            { title: 'alemon-plugin-kong', value: 'alemon-plugin-kong' },
-            { title: 'alemon-plugin-1999', value: 'alemon-plugin-1999' }
+            { title: '测试插件', value: 'alemon-plugin', selected: true },
+            { title: '光遇插件', value: 'Sky' },
+            { title: 'kong 插件', value: 'alemon-plugin-kong' },
+            { title: '1999 图鉴', value: 'alemon-plugin-1999' },
+            {
+              title: '阴天插件',
+              value: 'y-tian-plugin-for-alemon-bot'
+              // disabled: true
+            },
+            { title: '土块插件', value: 'alemon-earth-k-plugin' },
+
+            { title: '咸鱼插件', value: 'xianyu-plugin-alemon' },
+            { title: '修仙插件', value: 'xiuxian-plugin' }
           ]
         }
       ],
@@ -116,6 +124,7 @@ function setPlugins(name: string, plugins: Array<string>) {
     console.log('安装 alemon-plugin 完成');
   }
 
+  // 光遇插件
   if (plugins.includes('Sky')) {
     console.log('开始安装 Sky');
 
@@ -126,19 +135,7 @@ function setPlugins(name: string, plugins: Array<string>) {
     console.log('安装 Sky 完成');
   }
 
-  if (plugins.includes('xianyu-plugin-alemon')) {
-    console.log('开始安装 xianyu-plugin-alemon');
-
-    execSync(
-      `cd ./${name} && git clone --depth=1 https://gitee.com/suancaixianyu/xianyu-plugin-alemon.git ./plugins/xianyu-plugin-alemon/`,
-      {
-        stdio: 'inherit'
-      }
-    );
-
-    console.log('安装 xianyu-plugin-alemon 完成');
-  }
-
+  // 空空插件
   if (plugins.includes('alemon-plugin-kong')) {
     console.log('开始安装 alemon-plugin-kong');
 
@@ -152,6 +149,7 @@ function setPlugins(name: string, plugins: Array<string>) {
     console.log('安装 alemon-plugin-kong 完成');
   }
 
+  // 1999插件
   if (plugins.includes('alemon-plugin-1999')) {
     console.log('开始安装 alemon-plugin-1999');
 
@@ -163,5 +161,61 @@ function setPlugins(name: string, plugins: Array<string>) {
     );
 
     console.log('安装 alemon-plugin-1999 完成');
+  }
+
+  //阴天插件
+  if (plugins.includes('y-tian-plugin-for-alemon-bot')) {
+    console.log('开始安装 y-tian-plugin-for-alemon-bot');
+
+    execSync(
+      `cd ./${name} && git clone https://gitee.com/wan13877501248/y-tian-plugin-for-alemon-bot.git ./plugins/y-tian-plugin/`,
+      {
+        stdio: 'inherit'
+      }
+    );
+
+    console.log('安装 y-tian-plugin-for-alemon-bot 完成');
+  }
+
+  // 土块插件
+  if (plugins.includes('alemon-earth-k-plugin')) {
+    console.log('开始安装 alemon-earth-k-plugin');
+
+    execSync(
+      `cd ./${name} && git clone https://gitee.com/diqiushengwu/alemon-earth-k-plugin.git ./plugins/earth-k-plugin/`,
+      {
+        stdio: 'inherit'
+      }
+    );
+
+    console.log('安装 alemon-earth-k-plugin 完成');
+  }
+
+  // 咸鱼插件
+  if (plugins.includes('xianyu-plugin-alemon')) {
+    console.log('开始安装 xianyu-plugin-alemon');
+
+    execSync(
+      `cd ./${name} && git clone --depth=1 https://gitee.com/suancaixianyu/xianyu-plugin-alemon.git ./plugins/xianyu-plugin-alemon/`,
+      {
+        stdio: 'inherit'
+      }
+    );
+
+    console.log('安装 xianyu-plugin-alemon 完成');
+  }
+
+  // 修仙插件
+  if (plugins.includes('xiuxian-plugin')) {
+    console.log('开始安装 xiuxian-plugin');
+
+    execSync(
+      `cd ./${name} && git clone --depth=1 -b main https://gitee.com/ningmengchongshui/xiuxian-plugin.git ./plugins/xiuxian-plugin/`,
+      {
+        stdio: 'inherit'
+      }
+    );
+
+    console.log('安装 xiuxian-plugin 完成');
   }
 }
