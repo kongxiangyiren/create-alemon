@@ -55,7 +55,7 @@ async function start() {
             { title: '土块插件', value: 'alemon-earth-k-plugin' },
 
             { title: '咸鱼插件', value: 'xianyu-plugin-alemon' },
-            { title: '修仙插件', value: 'xiuxian-plugin' }
+            { title: '修仙插件', value: 'xiuxian-plugin', disabled: true }
           ]
         }
       ],
@@ -84,7 +84,7 @@ async function start() {
   console.log(`Cloning Alemon-Bot for ${name}...`);
   try {
     execSync(
-      `git clone --depth=1 https://gitee.com/ningmengchongshui/alemon-bot.git ${join(
+      `git clone --depth=1 -b template-qq https://gitee.com/ningmengchongshui/alemon.git ${join(
         process.cwd(),
         name
       )}`,
@@ -115,7 +115,7 @@ function setPlugins(name: string, plugins: Array<string>) {
     console.log('开始安装 alemon-plugin');
 
     execSync(
-      `cd ./${name} && git clone --depth=1 https://gitee.com/ningmengchongshui/alemon-plugin.git ./plugins/alemon-plugin/`,
+      `cd ./${name} && git clone --depth=1 -b plugin https://gitee.com/ningmengchongshui/alemon.git ./plugins/alemon-plugin/`,
       {
         stdio: 'inherit'
       }
